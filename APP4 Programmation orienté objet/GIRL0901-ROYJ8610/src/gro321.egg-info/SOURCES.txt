@@ -13,8 +13,12 @@ src/gro321/database/crud_clients.py
 src/gro321/database/crud_robots.py
 src/gro321/database/init_db.py
 src/gro321/models/__init__.py
+src/gro321/models/bon_diagnostic.py
+src/gro321/models/bon_mise_a_jour.py
+src/gro321/models/bon_reparation.py
 src/gro321/models/bon_travail.py
 src/gro321/models/client.py
+src/gro321/models/piece.py
 src/gro321/models/robot.py
 src/gro321/web/__init__.py
 src/gro321/web/app.py

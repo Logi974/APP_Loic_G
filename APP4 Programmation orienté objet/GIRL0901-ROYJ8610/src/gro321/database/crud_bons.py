@@ -14,7 +14,7 @@ reste de la base et de la normaliser.
 
 from datetime import datetime
 
-from ..models import BonTravail
+from ..models import BonTravail, BonDiagnostic, BonMiseAJour, BonReparation, Piece
 from .connexion import get_connection
 
 
@@ -35,11 +35,11 @@ def lister_bons(statut=None, numero_serie=None, db_path="data/gro321.db"):
     with get_connection(db_path) as conn:
         cursor = conn.cursor()
 
-        query = "SELECT * FROM bons_travail WHERE 1=1"
+        query = "SELECT * FROM bons_travail LEFT JOIN robots ON bons_travail.robot_id = robots.robot_id WHERE 1=1"
         params = []
 
         if statut:
-            query += " AND statut = ?"
+            query += " AND bons_travail.statut = ?"
             params.append(statut)
 
         if numero_serie:
@@ -56,6 +56,20 @@ def lister_bons(statut=None, numero_serie=None, db_path="data/gro321.db"):
 
         return bons
 
+def get_id_robot(numero_serie, cursor):
+    cursor.execute(
+            """
+            SELECT * FROM robots WHERE numero_serie = ?
+        """,
+            [numero_serie],
+        )
+
+    robot_id = None
+    if cursor.arraysize > 0:
+        row = cursor.fetchall()[0]
+        robot_id = row["robot_id"]
+
+    return robot_id
 
 def creer_bon_diagnostic(numero_serie, symptomes, db_path="data/gro321.db"):
     """
@@ -75,19 +89,17 @@ def creer_bon_diagnostic(numero_serie, symptomes, db_path="data/gro321.db"):
     Returns:
         ID du bon créé
     """
-    # TODO: Implémenter cette fonction
-
     with get_connection(db_path) as conn:
         cursor = conn.cursor()
-        date_creation = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        cursor.execute(
-            """
-            INSERT INTO bons_travail (type_bon, numero_serie, symptomes, date_creation, statut)
-            VALUES (?, ?, ?, ?, ?)
-        """,
-            ('diagnostic', numero_serie, symptomes, date_creation, 'en_attente'),
-        )
-        return cursor.lastrowid
+
+        robot_id = get_id_robot(numero_serie, cursor)
+        dt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        cursor.execute("INSERT INTO bons_travail (robot_id, type_bon, date_creation) VALUES (?, ?, ?)", [robot_id, 'diagnostic', dt])
+        bon_id = cursor.lastrowid
+        cursor.execute("INSERT INTO diagnostic (bon_id, symptomes) VALUES (?, ?)", [bon_id, symptomes])
+
+        return bon_id
 
 
 def creer_bon_mise_a_jour(
@@ -107,8 +119,17 @@ def creer_bon_mise_a_jour(
     Returns:
         ID du bon créé
     """
-    # TODO: Implémenter cette fonction
-    pass
+    with get_connection(db_path) as conn:
+        cursor = conn.cursor()
+
+        robot_id = get_id_robot(numero_serie, cursor)
+        dt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        cursor.execute("INSERT INTO bons_travail (robot_id, type_bon, date_creation) VALUES (?, ?, ?)", [robot_id, 'mise_a_jour', dt])
+        bon_id = cursor.lastrowid
+        cursor.execute("INSERT INTO mise_a_jour (bon_id, version_actuelle, version_cible) VALUES (?, ?, ?)", [bon_id, version_actuelle, version_cible])
+
+        return bon_id
 
 
 def creer_bon_reparation(numero_serie, composant, probleme, db_path="data/gro321.db"):
@@ -126,8 +147,17 @@ def creer_bon_reparation(numero_serie, composant, probleme, db_path="data/gro321
     Returns:
         ID du bon créé
     """
-    # TODO: Implémenter cette fonction
-    pass
+    with get_connection(db_path) as conn:
+        cursor = conn.cursor()
+
+        robot_id = get_id_robot(numero_serie, cursor)
+        dt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        cursor.execute("INSERT INTO bons_travail (robot_id, type_bon, date_creation) VALUES (?, ?, ?)", [robot_id, 'reparation', dt])
+        bon_id = cursor.lastrowid
+        cursor.execute("INSERT INTO reparation (bon_id, composant, probleme) VALUES (?, ?, ?)", [bon_id, composant, probleme])
+
+        return bon_id
 
 
 def lire_bon(bon_id, db_path="data/gro321.db"):
@@ -143,8 +173,48 @@ def lire_bon(bon_id, db_path="data/gro321.db"):
     Returns:
         Objet BonTravail (ou classe dérivée) ou None
     """
-    # TODO: Implémenter cette fonction
-    pass
+    with get_connection(db_path) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT liste_piece.piece_id, piece.nom
+            FROM liste_piece
+            LEFT JOIN piece ON liste_piece.piece_id = piece.piece_id
+            WHERE liste_piece.bon_id = ?
+        """,
+        [str(bon_id)]
+        )
+
+        pieces = []
+        for row in cursor.fetchall():
+            pieces.append(Piece(row["piece_id"], row["nom"]))
+
+        cursor.execute("""
+            SELECT *
+            FROM bons_travail
+            LEFT JOIN robots ON bons_travail.robot_id = robots.robot_id
+            LEFT JOIN diagnostic ON bons_travail.bon_id = diagnostic.bon_id
+            LEFT JOIN mise_a_jour ON bons_travail.bon_id = mise_a_jour.bon_id
+            LEFT JOIN reparation ON bons_travail.bon_id = reparation.bon_id
+            WHERE bons_travail.bon_id = ?
+        """,
+        [str(bon_id)]
+        )
+
+        if cursor.arraysize > 0:
+            row = cursor.fetchall()[0]
+            type_bon = row["type_bon"]
+
+            if type_bon == "diagnostic":
+                return BonDiagnostic(row["bon_id"], row["numero_serie"], row["date_creation"], row["statut"], row["symptomes"], row["diagnostic"], pieces)
+            elif type_bon == "mise_a_jour":
+                return BonMiseAJour(row["bon_id"], row["numero_serie"], row["date_creation"], row["statut"], row["version_actuelle"], row["version_cible"], pieces)
+            elif type_bon == "reparation":
+                return BonReparation(row["bon_id"], row["numero_serie"], row["date_creation"], row["statut"], row["composant"], row["probleme"], pieces)
+            else:
+                return BonTravail(row["bon_id"], row["numero_serie"], row["date_creation"], row["statut"], pieces=pieces)
+        else:
+            return None
 
 
 def modifier_statut_bon(bon_id, nouveau_statut, db_path="data/gro321.db"):
@@ -159,8 +229,17 @@ def modifier_statut_bon(bon_id, nouveau_statut, db_path="data/gro321.db"):
     Returns:
         True si modifié, False sinon
     """
-    # TODO: Implémenter cette fonction
-    pass
+    with get_connection(db_path) as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            UPDATE bons_travail
+            SET statut = ?
+            WHERE bon_id = ?
+        """,
+            (nouveau_statut, str(bon_id)),
+        )
+        return cursor.lastrowid
 
 
 def supprimer_bon(bon_id, db_path="data/gro321.db"):
@@ -174,8 +253,12 @@ def supprimer_bon(bon_id, db_path="data/gro321.db"):
     Returns:
         True si supprimé, False sinon
     """
-    # TODO: Implémenter cette fonction
-    pass
+    with get_connection(db_path) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute("DELETE FROM bons_travail WHERE bon_id = ?", [str(bon_id)])
+
+        return cursor.lastrowid
 
 
 # Extraits des notes de cours pour référence rapide:

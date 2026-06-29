@@ -138,7 +138,7 @@ class GMaoRequestHandler(BaseHTTPRequestHandler):
                         "numero_serie": bon.numero_serie,
                         "type_bon": bon.type_bon,
                         "statut": bon.statut,
-                        "description": bon.obtenir_description(),
+                        "description": bon.obtenir_description()
                     }
                 )
             else:

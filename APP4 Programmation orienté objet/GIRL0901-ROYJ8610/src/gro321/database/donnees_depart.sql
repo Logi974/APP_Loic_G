@@ -28,34 +28,36 @@ INSERT INTO robots (robot_id, modele, numero_serie, statut, client_id) VALUES
 -- Le robot est désigné par son numéro de série (pas de clé étrangère).
 -- Beaucoup de colonnes sont NULL selon le type de bon.
 
--- Bon de diagnostic
-INSERT INTO bons_travail (numero_serie, type_bon, date_creation, statut, symptomes, diagnostic) VALUES
-    ('SN-2024-003', 'diagnostic', '2024-06-01 10:30:00', 'termine',
-     'Le robot tourne en rond et ne suit pas les trajectoires',
-     'Capteur LIDAR avant défectueux');
+-- Tous les bons de travail
+INSERT INTO bons_travail (bon_id, robot_id, type_bon, date_creation, statut) VALUES
+    (1, 3, 'diagnostic', '2024-06-01 10:30:00', 'termine'),
+    (2, 1, 'mise_a_jour', '2024-06-05 14:00:00', 'termine'),
+    (3, 2, 'mise_a_jour', '2024-06-05 14:30:00', 'en_cours'),
+    (4, 6, 'reparation', '2024-06-03 09:00:00', 'termine'),
+    (5, 4, 'diagnostic', '2024-06-08 11:00:00', 'ouvert'),
+    (6, 5, 'reparation', '2024-06-07 16:00:00', 'en_cours');
 
--- Bons de mise à jour
-INSERT INTO bons_travail (numero_serie, type_bon, date_creation, statut, version_actuelle, version_cible, mise_a_jour_reussie) VALUES
-    ('SN-2024-001', 'mise_a_jour', '2024-06-05 14:00:00', 'termine', 'v1.2.3', 'v2.0.0', 1),
-    ('SN-2024-002', 'mise_a_jour', '2024-06-05 14:30:00', 'en_cours', 'v1.2.3', 'v2.0.0', NULL);
+-- Infos sur les bons de diagnostic
+INSERT INTO diagnostic (diagnostic_id, bon_id, symptomes, diagnostic) VALUES
+    (1, 1, 'Le robot tourne en rond et ne suit pas les trajectoires', 'Capteur LIDAR avant défectueux'),
+    (2, 5, 'Bruit anormal lors des virages', NULL);
 
--- Bon de réparation
-INSERT INTO bons_travail (numero_serie, type_bon, date_creation, statut, composant, probleme) VALUES
-    ('SN-2024-006', 'reparation', '2024-06-03 09:00:00', 'termine',
-     'Moteur roue gauche',
-     'Moteur ne répond plus aux commandes');
+-- Infos sur les bons de mise à jour
+INSERT INTO mise_a_jour (maj_id, bon_id, version_actuelle, version_cible, mise_a_jour_reussie) VALUES
+    (1, 2, 'v1.2.3', 'v2.0.0', 1),
+    (2, 3, 'v1.2.3', 'v2.0.0', NULL);
 
--- Autres bons en cours
-INSERT INTO bons_travail (numero_serie, type_bon, date_creation, statut, symptomes) VALUES
-    ('SN-2024-004', 'diagnostic', '2024-06-08 11:00:00', 'ouvert', 'Bruit anormal lors des virages');
+-- Infos sur les bons de réparation
+INSERT INTO reparation (reparation_id, bon_id, composant, probleme) VALUES
+    (1, 4, 'Moteur roue gauche', 'Moteur ne répond plus aux commandes'),
+    (2, 6, 'Batterie', 'Autonomie réduite de 50%');
 
-INSERT INTO bons_travail (numero_serie, type_bon, date_creation, statut, composant, probleme) VALUES
-    ('SN-2024-005', 'reparation', '2024-06-07 16:00:00', 'en_cours', 'Batterie', 'Autonomie réduite de 50%');
-
-INSERT INTO pieces (piece_id, nom) VALUES
+-- Pièces disponibles
+INSERT INTO piece (piece_id, nom) VALUES
     (1, 'Moteur NEMA-17'),
     (2, 'Courroie');
 
-INSERT INTO liste_pieces (bon_id, piece_id, quantite) VALUES
-    (4, 1, 1),  -- Bon de réparation pour SN-2024-006 utilise 1 Moteur NEMA-17
-    (4, 2, 1);  -- Bon de réparation pour SN-2024-006 utilise 1 Courroie
+-- Pièces nécessaires pour les différents bons de travail
+INSERT INTO liste_piece (bon_id, piece_id, quantite) VALUES
+    (4, 1, 1),
+    (4, 2, 1);
