@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 760 470" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <rect x="40" y="40" width="200" height="118" style="fill:white;stroke:rgb(44,74,110);stroke-width:1.5px;"/>
+    <rect x="40" y="40" width="200" height="26" style="fill:rgb(44,74,110);"/>
+    <g transform="matrix(1,0,0,1,140,58)">
+        <text x="-18.679px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:white;">Robot</text>
+    </g>
+    <g transform="matrix(1,0,0,1,55,86)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">serie</text>
+        <rect x="0" y="1.06" width="30.345" height="0.69" style="fill:rgb(26,44,64);"/>
+    </g>
+    <path d="M55,89L88,89" style="fill:none;fill-rule:nonzero;stroke:rgb(26,44,64);stroke-width:1px;"/>
+    <g transform="matrix(1,0,0,1,55,108)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">modele</text>
+    </g>
+    <g transform="matrix(1,0,0,1,55,130)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">mise_en_service</text>
+    </g>
+    <g transform="matrix(1,0,0,1,55,152)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">charge_utile</text>
+    </g>
+    <rect x="500" y="40" width="220" height="140" style="fill:white;stroke:rgb(44,74,110);stroke-width:1.5px;"/>
+    <rect x="500" y="40" width="220" height="26" style="fill:rgb(44,74,110);"/>
+    <g transform="matrix(1,0,0,1,610,58)">
+        <text x="-23.728px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:white;">Mission</text>
+    </g>
+    <g transform="matrix(1,0,0,1,515,86)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">code</text>
+        <rect x="0" y="1.06" width="30.358" height="0.69" style="fill:rgb(26,44,64);"/>
+    </g>
+    <path d="M515,89L549,89" style="fill:none;fill-rule:nonzero;stroke:rgb(26,44,64);stroke-width:1px;"/>
+    <g transform="matrix(1,0,0,1,515,108)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">site</text>
+    </g>
+    <g transform="matrix(1,0,0,1,515,130)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">date_prevue</text>
+    </g>
+    <g transform="matrix(1,0,0,1,515,152)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">duree_estimee</text>
+    </g>
+    <g transform="matrix(1,0,0,1,515,174)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(138,90,23);">matricule_op *</text>
+    </g>
+    <rect x="250" y="300" width="220" height="118" style="fill:white;stroke:rgb(44,74,110);stroke-width:1.5px;"/>
+    <rect x="250" y="300" width="220" height="26" style="fill:rgb(44,74,110);"/>
+    <g transform="matrix(1,0,0,1,360,318)">
+        <text x="-32.953px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:white;">Af<tspan x="-19.971px -16.082px " y="0px 0px ">fe</tspan>ctation</text>
+    </g>
+    <g transform="matrix(1,0,0,1,265,346)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(138,90,23);">serie *</text>
+        <rect x="0" y="1.06" width="39.683" height="0.69" style="fill:rgb(138,90,23);"/>
+    </g>
+    <path d="M265,349L298,349" style="fill:none;fill-rule:nonzero;stroke:rgb(138,90,23);stroke-width:1px;"/>
+    <g transform="matrix(1,0,0,1,265,368)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(138,90,23);">code *</text>
+        <rect x="0" y="1.06" width="39.696" height="0.69" style="fill:rgb(138,90,23);"/>
+    </g>
+    <path d="M265,371L299,371" style="fill:none;fill-rule:nonzero;stroke:rgb(138,90,23);stroke-width:1px;"/>
+    <g transform="matrix(1,0,0,1,265,390)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">date_af<tspan x="46.464px 50.354px " y="0px 0px ">fe</tspan>ctation</text>
+    </g>
+    <g transform="matrix(1,0,0,1,265,412)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">resultat</text>
+    </g>
+    <rect x="550" y="320" width="180" height="96" style="fill:white;stroke:rgb(44,74,110);stroke-width:1.5px;"/>
+    <rect x="550" y="320" width="180" height="26" style="fill:rgb(44,74,110);"/>
+    <g transform="matrix(1,0,0,1,640,338)">
+        <text x="-31.517px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:white;">Opérateur</text>
+    </g>
+    <g transform="matrix(1,0,0,1,565,366)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">matricule</text>
+        <rect x="0" y="1.06" width="56.793" height="0.69" style="fill:rgb(26,44,64);"/>
+    </g>
+    <path d="M565,369L628,369" style="fill:none;fill-rule:nonzero;stroke:rgb(26,44,64);stroke-width:1px;"/>
+    <g transform="matrix(1,0,0,1,565,388)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">nom</text>
+    </g>
+    <g transform="matrix(1,0,0,1,565,410)">
+        <g transform="matrix(14,0,0,14,26.4482,0)">
+        </g>
+        <g transform="matrix(14,0,0,14,30.3379,0)">
+        </g>
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:14px;fill:rgb(26,44,64);">certiﬁcation</text>
+    </g>
+    <g transform="matrix(0.666667,0,0,1.16571,36.6667,-27.5086)">
+        <g transform="matrix(1.5,-0,-0,0.857843,-55,23.598)">
+            <path d="M125.771,174.568L130,166L134.317,174.524C132.169,172.398 127.896,172.42 125.771,174.568Z" style="fill:rgb(138,90,23);fill-rule:nonzero;"/>
+            <path d="M240,370C158.405,370 131.137,279.475 130.035,172.837" style="fill:none;fill-rule:nonzero;stroke:rgb(138,90,23);stroke-width:1.42px;"/>
+        </g>
+    </g>
+    <g transform="matrix(-0.72619,0,0,-1.10857,789.19,502.411)">
+        <g transform="matrix(-1.37705,-0,-0,-0.902062,1086.75,453.206)">
+            <path d="M481.698,104.471L490,100L481.442,96.041C483.613,98.085 483.742,102.3 481.698,104.471Z" style="fill:rgb(138,90,23);fill-rule:nonzero;"/>
+            <path d="M483.256,100.205C395.636,105.597 368,216.146 368,294" style="fill:none;fill-rule:nonzero;stroke:rgb(138,90,23);stroke-width:1.41px;"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,0.910448,0,27.9403)">
+        <g transform="matrix(1,-0,-0,1.09836,0,-30.6885)">
+            <path d="M649.624,304.192L644,312L641.128,302.816C642.908,305.284 647.156,305.972 649.624,304.192Z" style="fill:rgb(138,90,23);fill-rule:nonzero;"/>
+            <path d="M624,190C657.862,234.531 651.026,269.397 645.101,305.203" style="fill:none;fill-rule:nonzero;stroke:rgb(138,90,23);stroke-width:1.43px;"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,31.7344,300)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;fill:rgb(85,85,85);">Af<tspan x="12.054px 15.666px " y="0px 0px ">fe</tspan>ctation.serie</text>
+        <text x="96.599px" y="0px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:13px;fill:rgb(85,85,85);">→</text>
+        <text x="0px" y="13px" style="font-family:'Helvetica';font-size:13px;fill:rgb(85,85,85);">Robot.serie</text>
+    </g>
+    <g transform="matrix(1,0,0,1,325.766,110)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;fill:rgb(85,85,85);">Af<tspan x="12.054px 15.666px " y="0px 0px ">fe</tspan>ctation.code</text>
+        <text x="96.611px" y="0px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:13px;fill:rgb(85,85,85);">→</text>
+        <text x="0px" y="13px" style="font-family:'Helvetica';font-size:13px;fill:rgb(85,85,85);">Mission.code</text>
+    </g>
+    <g transform="matrix(1,0,0,1,502.618,274.29)">
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;fill:rgb(85,85,85);">Mission.matricule_op</text>
+        <text x="125.715px" y="0px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:13px;fill:rgb(85,85,85);">→</text>
+        <text x="0px" y="13px" style="font-family:'Helvetica';font-size:13px;fill:rgb(85,85,85);">Opérateur<tspan x="57.821px 61.433px " y="13px 13px ">.m</tspan>atricule</text>
+    </g>
+    <g transform="matrix(1,0,0,1,40,450)">
+        <g transform="matrix(13,0,0,13,324.41,0)">
+        </g>
+        <g transform="matrix(13,0,0,13,328.021,0)">
+        </g>
+        <text x="0px" y="0px" style="font-family:'Helvetica';font-size:13px;fill:rgb(85,85,85);">Attributs soulignés : clé primaire — * : clé étrangère (les ﬂèches indiquent l&apos;attribut référencé)</text>
+    </g>
+</svg>

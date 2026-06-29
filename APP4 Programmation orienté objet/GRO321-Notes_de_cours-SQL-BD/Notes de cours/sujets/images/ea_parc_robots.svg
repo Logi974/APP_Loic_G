@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" font-family="Helvetica, Arial, sans-serif" font-size="14">
+  <defs>
+    <style>
+      .entity { fill: #eef3fa; stroke: #2c4a6e; stroke-width: 1.5; }
+      .etitle { font-weight: bold; text-anchor: middle; fill: #1a2c40; }
+      .attr   { fill: #1a2c40; }
+      .ident  { fill: #1a2c40; text-decoration: underline; }
+      .assoc  { fill: #fdf3e3; stroke: #8a5a17; stroke-width: 1.5; }
+      .atitle { font-weight: bold; text-anchor: middle; fill: #4a3008; }
+      .aattr  { font-style: italic; text-anchor: middle; fill: #4a3008; font-size: 13px; }
+      .link   { stroke: #444444; stroke-width: 1.5; fill: none; }
+      .card   { font-size: 13px; fill: #444444; }
+    </style>
+  </defs>
+
+  <!-- Entité Robot -->
+  <rect class="entity" x="30" y="55" width="190" height="130" rx="2"/>
+  <line x1="30" y1="83" x2="220" y2="83" stroke="#2c4a6e" stroke-width="1.5"/>
+  <text class="etitle" x="125" y="75">Robot</text>
+  <text class="ident" x="45" y="105">serie</text>
+  <line x1="45" y1="108" x2="78" y2="108" stroke="#1a2c40" stroke-width="1"/>
+  <text class="attr" x="45" y="125">modele</text>
+  <text class="attr" x="45" y="145">mise_en_service</text>
+  <text class="attr" x="45" y="165">charge_utile</text>
+
+  <!-- Entité Mission -->
+  <rect class="entity" x="545" y="55" width="190" height="130" rx="2"/>
+  <line x1="545" y1="83" x2="735" y2="83" stroke="#2c4a6e" stroke-width="1.5"/>
+  <text class="etitle" x="640" y="75">Mission</text>
+  <text class="ident" x="560" y="105">code</text>
+  <line x1="560" y1="108" x2="594" y2="108" stroke="#1a2c40" stroke-width="1"/>
+  <text class="attr" x="560" y="125">site</text>
+  <text class="attr" x="560" y="145">date_prevue</text>
+  <text class="attr" x="560" y="165">duree_estimee</text>
+
+  <!-- Lien Affectation -->
+  <line class="link" x1="220" y1="120" x2="300" y2="120"/>
+  <line class="link" x1="460" y1="120" x2="545" y2="120"/>
+  <polygon class="assoc" points="300,120 380,82 460,120 380,158"/>
+  <text class="atitle" x="380" y="125">Affectation</text>
+  <text class="aattr" x="380" y="180">date_affectation</text>
+  <text class="aattr" x="380" y="198">resultat</text>
+  <text class="card" x="232" y="112">(0,N)</text>
+  <text class="card" x="496" y="112">(1,N)</text>
+
+  <!-- Entité Opérateur -->
+  <rect class="entity" x="545" y="320" width="190" height="105" rx="2"/>
+  <line x1="545" y1="348" x2="735" y2="348" stroke="#2c4a6e" stroke-width="1.5"/>
+  <text class="etitle" x="640" y="340">Opérateur</text>
+  <text class="ident" x="560" y="370">matricule</text>
+  <line x1="560" y1="373" x2="623" y2="373" stroke="#1a2c40" stroke-width="1"/>
+  <text class="attr" x="560" y="390">nom</text>
+  <text class="attr" x="560" y="410">certification</text>
+
+  <!-- Lien Supervision -->
+  <line class="link" x1="640" y1="185" x2="640" y2="218"/>
+  <line class="link" x1="640" y1="288" x2="640" y2="320"/>
+  <polygon class="assoc" points="565,253 640,218 715,253 640,288"/>
+  <text class="atitle" x="640" y="258">Supervision</text>
+  <text class="card" x="652" y="205">(1,1)</text>
+  <text class="card" x="652" y="312">(0,N)</text>
+</svg>
