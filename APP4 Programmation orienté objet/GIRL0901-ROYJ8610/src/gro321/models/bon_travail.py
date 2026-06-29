@@ -11,6 +11,7 @@ obligatoirement redéfinir (ici obtenir_description()).
 
 from datetime import datetime
 
+from ..models import Piece
 
 class BonTravail:
     """
@@ -27,7 +28,7 @@ class BonTravail:
 
     STATUTS_VALIDES = ["ouvert", "en_cours", "termine", "annule"]
 
-    def __init__(self, bon_id, numero_serie, date_creation=None, statut="ouvert"):
+    def __init__(self, bon_id, numero_serie, date_creation=None, statut="ouvert", type_bon="generique", pieces:list[Piece]=[]):
         """
         Initialise un bon de travail.
 
@@ -41,7 +42,8 @@ class BonTravail:
         self.numero_serie = numero_serie
         self.date_creation = date_creation or datetime.now()
         self.statut = statut
-        self.type_bon = "generique"
+        self.type_bon = type_bon
+        self.pieces = pieces
 
     def changer_statut(self, nouveau_statut):
         """

@@ -42,41 +42,59 @@ CREATE TABLE IF NOT EXISTS robots (
 -- plus normalisée: selon le type de bon, beaucoup de colonnes restent NULL.
 CREATE TABLE IF NOT EXISTS bons_travail (
     bon_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    numero_serie TEXT NOT NULL,  -- PREUVE DE CONCEPT: pas de clé étrangère
+    robot_id INTEGER NOT NULL,
     type_bon TEXT NOT NULL,
     date_creation TEXT NOT NULL,
     statut TEXT NOT NULL DEFAULT 'ouvert',
 
-    -- Colonnes spécifiques selon le type (beaucoup de NULL!)
-    symptomes TEXT,           -- Pour diagnostic
-    diagnostic TEXT,          -- Pour diagnostic
-    version_actuelle TEXT,    -- Pour mise à jour
-    version_cible TEXT,       -- Pour mise à jour
-    mise_a_jour_reussie INTEGER,  -- Pour mise à jour (0/1/NULL)
-    composant TEXT,           -- Pour réparation
-    probleme TEXT,            -- Pour réparation
-
-    FOREIGN KEY (numero_serie) REFERENCES robots(numero_serie),
     CHECK (type_bon IN ('diagnostic', 'mise_a_jour', 'reparation')),
-    CHECK (statut IN ('ouvert', 'en_cours', 'termine', 'annule'))
+    CHECK (statut IN ('ouvert', 'en_cours', 'termine', 'annule')),
+    FOREIGN KEY (robot_id) REFERENCES robots(robot_id)
 );
 
-CREATE TABLE IF NOT EXISTS pieces (
+CREATE TABLE IF NOT EXISTS diagnostic (
+    diagnostic_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    bon_id INTEGER NOT NULL UNIQUE,
+    symptomes TEXT,
+    diagnostic TEXT,
+
+    FOREIGN KEY (bon_id) REFERENCES bons_travail(bon_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS mise_a_jour (
+    maj_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    bon_id INTEGER NOT NULL UNIQUE,
+    version_actuelle TEXT,
+    version_cible TEXT,
+    mise_a_jour_reussie INTEGER,
+
+    FOREIGN KEY (bon_id) REFERENCES bons_travail(bon_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS reparation (
+    reparation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    bon_id INTEGER NOT NULL UNIQUE,
+    composant TEXT,
+    probleme TEXT,
+
+    FOREIGN KEY (bon_id) REFERENCES bons_travail(bon_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS piece (
     piece_id INTEGER PRIMARY KEY AUTOINCREMENT,
     nom TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS liste_pieces (
+CREATE TABLE IF NOT EXISTS liste_piece (
     bon_id INTEGER NOT NULL,
     piece_id INTEGER NOT NULL,
-    quantite INTEGER NOT NULL,
-    
+    quantite INTEGER,
+
     PRIMARY KEY (bon_id, piece_id),
-    FOREIGN KEY (bon_id) REFERENCES bons_travail(bon_id),
-    FOREIGN KEY (piece_id) REFERENCES pieces(piece_id)
+    FOREIGN KEY (bon_id) REFERENCES bons_travail(bon_id) ON DELETE CASCADE,
+    FOREIGN KEY (piece_id) REFERENCES piece(piece_id)
 );
 
 -- Index pour améliorer les performances
 CREATE INDEX IF NOT EXISTS idx_robots_client ON robots(client_id);
-CREATE INDEX IF NOT EXISTS idx_bons_numero_serie ON bons_travail(numero_serie);
 CREATE INDEX IF NOT EXISTS idx_bons_statut ON bons_travail(statut);
